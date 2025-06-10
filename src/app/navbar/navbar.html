@@ -1,0 +1,43 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a href="/" class="logo">
+      <span class="logo-enchere">Enchere</span>
+      <span class="logo-beta">Beta</span>
+    </a>
+  </div>
+  
+  <div class="navbar-menu">
+    <a href="/" class="nav-item">Accueil</a>
+    <a href="/encheres" class="nav-item">Enchères</a>
+    <a href="/mes-participations" class="nav-item">Mes Participations</a>
+    <a href="/a-propos" class="nav-item">À Propos</a>
+    <a href="/faq" class="nav-item">FAQ</a>
+  </div>
+
+  <div class="navbar-end">
+    <button class="notification-btn" (click)="toggleNotifications()">
+      <i class="fas fa-bell"></i>
+      <span class="notification-badge" *ngIf="hasNotifications">3</span>
+    </button>
+    
+    <div class="profile-dropdown">
+      <button class="profile-btn" (click)="toggleProfileMenu()">
+        <i class="fas fa-user-circle"></i>
+      </button>
+      <div class="dropdown-menu" *ngIf="isProfileMenuOpen">
+        <a href="/profile" class="dropdown-item">
+          <i class="fas fa-user"></i>
+          <span>Mon Profil</span>
+        </a>
+        <a href="/settings" class="dropdown-item">
+          <i class="fas fa-cog"></i>
+          <span>Paramètres</span>
+        </a>
+        <a href="/logout" class="dropdown-item">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Déconnexion</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
