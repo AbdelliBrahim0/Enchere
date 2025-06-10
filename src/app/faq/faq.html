@@ -1,0 +1,33 @@
+<div class="faq-container">
+  <div class="faq-header">
+    <h1>Questions Fréquentes</h1>
+    <p>Trouvez rapidement des réponses à vos questions sur EnchereBeta</p>
+  </div>
+
+  <div class="faq-content">
+    <div class="faq-item" *ngFor="let item of faqItems; let i = index" 
+         [class.active]="item.isOpen"
+         (click)="toggleFaq(i)">
+      <div class="faq-question">
+        <h3>{{ item.question }}</h3>
+        <span class="toggle-icon">
+          <i class="fas" [class.fa-plus]="!item.isOpen" [class.fa-minus]="item.isOpen"></i>
+        </span>
+      </div>
+      <div class="faq-answer" [class.open]="item.isOpen">
+        <p>{{ item.reponse }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-contact">
+    <h3>Vous n'avez pas trouvé votre réponse ?</h3>
+    <p>Notre équipe est là pour vous aider</p>
+    <a href="/contact" class="contact-btn">
+      <i class="fas fa-envelope"></i>
+      Contactez-nous
+    </a>
+  </div>
+</div>
+
+<app-footer></app-footer>

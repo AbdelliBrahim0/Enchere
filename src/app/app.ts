@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterModule } from '@angular/router';
+import { HeroComponent } from './hero/hero';
 import { NavbarComponent } from './navbar/navbar';
-import { Hero } from './hero/hero';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, Hero],
+  imports: [RouterOutlet, RouterModule, NavbarComponent, HeroComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class AppComponent {
   title = 'EnchereBeta';
 }

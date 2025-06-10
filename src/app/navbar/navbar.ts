@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   isProfileMenuOpen = false;
+  isEncheresMenuOpen = false;
   hasNotifications = true;
   userProfileImage: string | null = null;
 
@@ -23,11 +24,21 @@ export class NavbarComponent implements OnInit {
 
   toggleProfileMenu() {
     this.isProfileMenuOpen = !this.isProfileMenuOpen;
+    if (this.isProfileMenuOpen) {
+      this.isEncheresMenuOpen = false;
+    }
+  }
+
+  toggleEncheresMenu() {
+    this.isEncheresMenuOpen = !this.isEncheresMenuOpen;
+    if (this.isEncheresMenuOpen) {
+      this.isProfileMenuOpen = false;
+    }
   }
 
   toggleNotifications() {
-    // Logique pour afficher les notifications
-    console.log('Afficher les notifications');
+    // Logique pour gérer les notifications
+    console.log('Toggle notifications');
   }
 
   private loadUserProfile() {
@@ -40,7 +51,8 @@ export class NavbarComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (!target.closest('.profile-dropdown')) {
+    if (!target.closest('.dropdown')) {
+      this.isEncheresMenuOpen = false;
       this.isProfileMenuOpen = false;
     }
   }

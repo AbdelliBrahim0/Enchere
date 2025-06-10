@@ -1,0 +1,81 @@
+<section class="about-content">
+  <div class="mission-section">
+    <div class="container">
+      <div class="mission-content">
+        <h1>À Propos de <span class="highlight">Enchere</span><span class="accent">Beta</span></h1>
+        <p class="mission-subtitle">Révolutionner l'expérience des enchères en ligne</p>
+        <h2>Notre Mission</h2>
+        <p>Chez EnchereBeta, nous nous engageons à transformer l'expérience des enchères en ligne en la rendant plus accessible, sécurisée et passionnante. Notre plateforme combine innovation technologique et expertise du marché pour offrir une expérience unique à nos utilisateurs.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="features-section">
+    <div class="container">
+      <h2>Nos Points Forts</h2>
+      <div class="features-grid">
+        <div class="feature-card" *ngFor="let feature of features">
+          <div class="feature-icon">
+            <i class="fas {{feature.icon}}"></i>
+          </div>
+          <h3>{{feature.title}}</h3>
+          <p>{{feature.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="team-section">
+    <div class="container">
+      <h2>Notre Équipe</h2>
+      <div class="team-grid">
+        <div class="team-card" *ngFor="let member of team">
+          <div class="member-image">
+            <img [src]="member.image" [alt]="member.name">
+          </div>
+          <div class="member-info">
+            <h3>{{member.name}}</h3>
+            <span class="role">{{member.role}}</span>
+            <p>{{member.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="values-section">
+    <div class="container">
+      <h2>Nos Valeurs</h2>
+      <div class="values-content">
+        <div class="value-item">
+          <i class="fas fa-handshake"></i>
+          <h3>Transparence</h3>
+          <p>Nous croyons en la transparence totale dans toutes nos transactions et interactions.</p>
+        </div>
+        <div class="value-item">
+          <i class="fas fa-heart"></i>
+          <h3>Passion</h3>
+          <p>Notre passion pour les enchères nous pousse à innover constamment.</p>
+        </div>
+        <div class="value-item">
+          <i class="fas fa-star"></i>
+          <h3>Excellence</h3>
+          <p>Nous visons l'excellence dans chaque aspect de notre service.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div class="container">
+      <h2>Rejoignez l'Aventure</h2>
+      <p>Découvrez une nouvelle façon d'enchérir avec EnchereBeta</p>
+      <button class="cta-button">
+        <i class="fas fa-arrow-right"></i>
+        Commencer Maintenant
+      </button>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>
