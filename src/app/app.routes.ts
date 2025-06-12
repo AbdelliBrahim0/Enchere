@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { ToutLesEnchersComponent } from './tout-les-enchers/tout-les-enchers';
+import { Parametres } from './parametres/parametres';
+import { Guide } from './guide/guide';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/Accueil', pathMatch: 'full' },
@@ -8,5 +10,8 @@ export const routes: Routes = [
   { path: 'faq', loadComponent: () => import('./faq/faq').then(m => m.FaqComponent) },
   { path: 'tout-les-enchers', component: ToutLesEnchersComponent },
   { path: 'mes-participations', loadComponent: () => import('./mesparticipations/mesparticipations').then(m => m.Mesparticipations) },
-  { path: 'profil', loadComponent: () => import('./profile/profile').then(m => m.ProfileComponent) }
+  { path: 'profil', loadComponent: () => import('./profile/profile').then(m => m.ProfileComponent) },
+  { path: 'parametres', component: Parametres },
+  { path: 'settings', component: Parametres },
+  { path: 'historique', component: Guide },
 ];

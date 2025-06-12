@@ -15,7 +15,6 @@
       </button>
       <div class="dropdown-menu" [class.show]="isEncheresMenuOpen">
         <a class="dropdown-item" routerLink="/tout-les-enchers">Enchères à venir</a>
-        <a class="dropdown-item" routerLink="/mes-enchers">Enchères en live</a>
         <a class="dropdown-item" routerLink="/historique">Guide Participation</a>
       </div>
     </div>
@@ -76,7 +75,7 @@
           <div class="user-name">{{ user.nom_d_utilisateur }}</div>
           <div class="user-balance">
             <i class="fas fa-coins"></i>
-            {{ user.solde }} €
+            {{ user.solde }} BetaCoin
           </div>
         </div>
         

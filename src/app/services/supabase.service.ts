@@ -115,23 +115,25 @@ export class SupabaseService {
     try {
       const session = await this.getSession();
       if (!session?.user?.email) {
+        console.error('Erreur : Email utilisateur non défini ou session invalide.');
         return { data: null, error: new Error('Non authentifié') };
       }
 
+      const email = session.user.email.trim().toLowerCase();
       const { data, error } = await this.supabase
         .from('users')
-        .select('user_id, nom_d_utilisateur, email, solde, created_at')
-        .eq('email', session.user.email)
+        .select('user_id, nom_d_utilisateur, email, solde') // Suppression de la colonne `created_at`
+        .eq('email', email)
         .single();
 
       if (error) {
-        console.error('Erreur lors du chargement du profil:', error);
+        console.error('Erreur lors du chargement du profil depuis Supabase:', error);
         return { data: null, error };
       }
 
       return { data, error: null };
     } catch (error) {
-      console.error('Erreur lors du chargement du profil:', error);
+      console.error('Erreur inattendue lors du chargement du profil:', error);
       return { data: null, error };
     }
   }
@@ -324,4 +326,4 @@ export class SupabaseService {
       return { data: null, error };
     }
   }
-} 
+}

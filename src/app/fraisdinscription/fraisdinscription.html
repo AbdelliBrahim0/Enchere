@@ -12,8 +12,8 @@
       <h2>Confirmation de participation</h2>
       
       <div class="alert-message">
-        <p>Les frais de participation de <strong>{{ fraisParticipation }}€</strong> seront débités de votre solde.</p>
-        <p>Votre solde actuel: <strong>{{ userBalance }}€</strong></p>
+        <p>Les frais de participation de <strong>{{ fraisParticipation }}BetaCoin</strong> seront débités de votre solde.</p>
+        <p>Votre solde actuel: <strong>{{ userBalance }}BetaCoin</strong></p>
       </div>
 
       <div *ngIf="!showConfirmation" class="warning-message">
@@ -23,7 +23,7 @@
 
       <div *ngIf="showConfirmation" class="success-message">
         <i class="fas fa-check-circle"></i>
-        Les frais de participation de {{ fraisParticipation }}€ ont été débités avec succès de votre solde.
+        Les frais de participation de {{ fraisParticipation }}BetaCoin ont été débités avec succès de votre solde.
       </div>
 
       <div class="actions">

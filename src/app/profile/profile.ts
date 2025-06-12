@@ -10,7 +10,7 @@ interface User {
   nom_d_utilisateur: string;
   email: string;
   solde: number;
-  created_at: string;
+  created_at?: string; // Propriété rendue optionnelle
 }
 
 @Component({
