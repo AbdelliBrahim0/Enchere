@@ -1,0 +1,67 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="onClose()">&times;</button>
+
+    <div class="form-content">
+      <h2>Participer à l'enchère</h2>
+      <p class="article-name">{{ enchere?.nom_article }}</p>
+
+      <div *ngIf="!showConfirmation" class="form-section">
+        <div class="balance-info">
+          <p>Votre solde actuel: <strong>{{ currentBalance }}€</strong></p>
+        </div>
+
+        <div class="form-group">
+          <label for="montant">Montant de votre mise (€)</label>
+          <input 
+            type="number" 
+            id="montant" 
+            [(ngModel)]="montantMise" 
+            (input)="onMontantChange()"
+            min="0"
+            [max]="userBalance"
+            step="0.01"
+            placeholder="Entrez le montant"
+          >
+          <div class="error-message" *ngIf="errorMessage">
+            <i class="fas fa-exclamation-circle"></i>
+            {{ errorMessage }}
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="cancel-btn" (click)="onClose()">
+            <i class="fas fa-times"></i>
+            Annuler
+          </button>
+          <button class="submit-btn" (click)="onSubmit()" [disabled]="!!errorMessage">
+            <i class="fas fa-check"></i>
+            Confirmer la mise
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="showConfirmation" class="confirmation-section">
+        <div class="confirmation-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>Mise prise en charge</h3>
+        <p class="confirmation-message">
+          Votre mise de <strong>{{ montantMise }}€</strong> a été enregistrée avec succès.
+        </p>
+        <div class="actions">
+          <button class="submit-btn" (click)="onClose()">
+            <i class="fas fa-check"></i>
+            Terminer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-mise-confirme
+  [isOpen]="showMiseConfirme"
+  [montantMise]="montantMise"
+  (close)="onMiseConfirmeClose()">
+</app-mise-confirme>

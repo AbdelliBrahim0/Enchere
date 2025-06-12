@@ -1,57 +1,40 @@
 <footer class="footer">
   <div class="footer-content">
-    <div class="footer-section brand">
-      <div class="footer-logo">
-        <span class="logo-enchere">Enchere</span>
-        <span class="logo-beta">Beta</span>
-      </div>
-      <p class="brand-description">
-        La plateforme d'enchères en ligne innovante qui révolutionne votre expérience d'achat.
-      </p>
+    <div class="footer-section">
+      <h3>À propos</h3>
+      <p>Plateforme d'enchères en ligne offrant une expérience unique d'achat et de vente.</p>
+    </div>
+
+    <div class="footer-section">
+      <h3>Liens rapides</h3>
+      <ul>
+        <li><a routerLink="/">Accueil</a></li>
+        <li><a routerLink="/mes-participations">Mes participations</a></li>
+        <li><a routerLink="/profil">Mon profil</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <ul class="contact-info">
+        <li><i class="fas fa-envelope"></i> contact&#64;encheres.com</li>
+        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+        <li><i class="fas fa-map-marker-alt"></i> Paris, France</li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Suivez-nous</h3>
       <div class="social-links">
-        <a *ngFor="let social of socialLinks" 
-           [href]="social.url" 
-           target="_blank" 
-           class="social-link"
-           [attr.aria-label]="'Suivez-nous sur ' + social.icon">
-          <i class="fab {{social.icon}}"></i>
-        </a>
+        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
       </div>
-    </div>
-
-    <div class="footer-section links">
-      <h3>Liens Rapides</h3>
-      <ul>
-        <li *ngFor="let link of quickLinks">
-          <a [routerLink]="link.path">{{link.name}}</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="footer-section legal">
-      <h3>Informations Légales</h3>
-      <ul>
-        <li *ngFor="let link of legalLinks">
-          <a [routerLink]="link.path">{{link.name}}</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="footer-section newsletter">
-      <h3>Restez Informé</h3>
-      <p>Inscrivez-vous à notre newsletter pour ne manquer aucune enchère exclusive.</p>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Votre adresse email" required>
-        <button type="submit">
-          <i class="fas fa-paper-plane"></i>
-        </button>
-      </form>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <div class="footer-bottom-content">
-      <p>&copy; {{currentYear}} EnchereBeta. Tous droits réservés.</p>
-    </div>
+    <p>&copy; {{ currentYear }} Enchères. Tous droits réservés.</p>
   </div>
 </footer>

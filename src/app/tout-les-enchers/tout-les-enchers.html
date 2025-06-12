@@ -1,1 +1,144 @@
-<p>tout-les-enchers works!</p>
+<div class="encheres-container">
+  <div class="encheres-header">
+    <h1>Enchères en cours</h1>
+    <div class="search-bar">
+      <input 
+        type="text" 
+        placeholder="Rechercher une enchère..." 
+        (input)="onSearch($any($event.target).value)"
+        class="search-input"
+      >
+      <i class="fas fa-search search-icon"></i>
+    </div>
+  </div>
+
+  <div class="next-enchere-info" *ngIf="!isLoading && !error">
+    <i class="fas fa-clock"></i>
+    <span>{{ nextEnchereTime }}</span>
+  </div>
+
+  <div class="categories-bar">
+    <button 
+      *ngFor="let category of categories" 
+      [class.active]="category === selectedCategory"
+      (click)="onCategoryChange(category)"
+      class="category-btn"
+    >
+      {{ category }}
+    </button>
+  </div>
+
+  <!-- État de chargement -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Chargement des enchères...</p>
+  </div>
+
+  <!-- Message d'erreur -->
+  <div *ngIf="error" class="error-container">
+    <p class="error-message">{{ error }}</p>
+    <button class="retry-btn" (click)="refreshEncheres()">
+      <i class="fas fa-sync-alt"></i>
+      Réessayer
+    </button>
+  </div>
+
+  <!-- Liste des enchères -->
+  <div *ngIf="!isLoading && !error" class="encheres-grid">
+    <div *ngIf="filteredEncheres.length === 0" class="no-results">
+      <i class="fas fa-search"></i>
+      <p>Aucune enchère trouvée</p>
+    </div>
+
+    <div *ngFor="let enchere of filteredEncheres" class="enchere-card">
+      <div class="enchere-image">
+        <img [src]="enchere.url_photo_darticle" [alt]="enchere.nom_article">
+      </div>
+      
+      <div class="enchere-content">
+        <h3 class="enchere-title">{{ enchere.nom_article }}</h3>
+        <p class="enchere-description">{{ enchere.description }}</p>
+        
+        <div class="enchere-details">
+          <div class="price-info">
+            <span class="current-price">{{ enchere.frais_participation }} €</span>
+            <span class="initial-price">Frais de participation</span>
+          </div>
+          
+          <div class="enchere-meta">
+            <div class="bidders">
+              <i class="fas fa-users"></i>
+              <span>Min: {{ enchere.min_participants }} participants</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="enchere-actions">
+          <button class="bid-btn" (click)="openEnchereDetails(enchere)">
+            <i class="fas fa-gavel"></i>
+            Enchérir
+          </button>
+          <button class="watch-btn">
+            <i class="far fa-heart"></i>
+            Surveiller
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination simplifiée -->
+  <div *ngIf="!isLoading && !error && totalPages > 1" class="pagination">
+    <button 
+      class="pagination-btn" 
+      [disabled]="currentPage === 1"
+      (click)="goToPage(currentPage - 1)"
+    >
+      <i class="fas fa-chevron-left"></i>
+      Précédent
+    </button>
+
+    <span class="page-info">Page {{ currentPage }} sur {{ totalPages }}</span>
+
+    <button 
+      class="pagination-btn"
+      [disabled]="currentPage === totalPages"
+      (click)="goToPage(currentPage + 1)"
+    >
+      Suivant
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Enchere Details Modal -->
+<app-enchere-detailles
+  *ngIf="isModalOpen"
+  [enchere]="selectedEnchere"
+  [isOpen]="isModalOpen"
+  (close)="closeEnchereDetails()"
+  (participate)="openFraisModal()"
+></app-enchere-detailles>
+
+<!-- Frais Modal -->
+<app-fraisdinscription
+  *ngIf="isFraisModalOpen"
+  [isOpen]="isFraisModalOpen"
+  [fraisParticipation]="selectedEnchere?.frais_participation || 0"
+  [enchere]="selectedEnchere"
+  [userBalance]="userBalance"
+  (close)="closeFraisModal()"
+  (confirm)="openParticipationForm()"
+></app-fraisdinscription>
+
+<!-- Participation Form -->
+<app-formulaire-de-participation
+  *ngIf="isParticipationFormOpen"
+  [isOpen]="isParticipationFormOpen"
+  [enchere]="selectedEnchere"
+  [userBalance]="userBalance"
+  (close)="closeParticipationForm()"
+  (submit)="onParticipate()"
+></app-formulaire-de-participation>
+
+<app-footer></app-footer>

@@ -1,0 +1,37 @@
+<div class="participations-container">
+  <h1>Mes Participations</h1>
+
+  <div *ngIf="loading" class="loading">
+    <i class="fas fa-spinner fa-spin"></i>
+    Chargement de vos participations...
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    <i class="fas fa-exclamation-circle"></i>
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error && participations.length === 0" class="no-participations">
+    <i class="fas fa-info-circle"></i>
+    <p>Vous n'avez pas encore participé à des enchères.</p>
+  </div>
+
+  <div *ngIf="!loading && !error && participations.length > 0" class="participations-grid">
+    <div *ngFor="let participation of participations" class="participation-card">
+      <div class="article-image">
+        <img [src]="participation.url_photo_darticle" [alt]="participation.nom_article">
+      </div>
+      
+      <div class="article-info">
+        <h3>{{ participation.nom_article }}</h3>
+        <p class="category">{{ participation.categorie }}</p>
+        <div class="mise-info">
+          <span class="label">Votre mise:</span>
+          <span class="amount">{{ participation.mise }}€</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

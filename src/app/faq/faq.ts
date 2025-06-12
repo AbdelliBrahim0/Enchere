@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FooterComponent } from '../footer/footer';
+import { Footer } from '../footer/footer';
 
 interface FaqItem {
   question: string;
@@ -12,7 +12,7 @@ interface FaqItem {
 @Component({
   selector: 'app-faq',
   standalone: true,
-  imports: [CommonModule, RouterModule, FooterComponent],
+  imports: [CommonModule, RouterModule, Footer],
   templateUrl: './faq.html',
   styleUrl: './faq.css'
 })

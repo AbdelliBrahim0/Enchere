@@ -9,42 +9,78 @@
   <div class="navbar-menu">
     <a routerLink="/Accueil" class="nav-item">Accueil</a>
     <div class="dropdown">
-      <button class="nav-item dropdown-toggle" (click)="toggleEncheresMenu()">
+      <button class="nav-item dropdown-toggle" (click)="toggleEncheresMenu($event)">
         Enchères
         <i class="fas fa-chevron-down"></i>
       </button>
       <div class="dropdown-menu" [class.show]="isEncheresMenuOpen">
-        <a routerLink="/encheres/avenir" class="dropdown-item">
-          <i class="fas fa-calendar-alt"></i>
-          Enchères à venir
-        </a>
-        <a routerLink="/encheres/live" class="dropdown-item">
-          <i class="fas fa-video"></i>
-          Enchères en live
-        </a>
-        <a routerLink="/encheres/guide" class="dropdown-item">
-          <i class="fas fa-book"></i>
-          Guide complet de participation
-        </a>
+        <a class="dropdown-item" routerLink="/tout-les-enchers">Enchères à venir</a>
+        <a class="dropdown-item" routerLink="/mes-enchers">Enchères en live</a>
+        <a class="dropdown-item" routerLink="/historique">Guide Participation</a>
       </div>
     </div>
     <a routerLink="/mes-participations" class="nav-item">Mes Participations</a>
     <a routerLink="/Apropos" class="nav-item">À Propos</a>
     <a routerLink="/faq" class="nav-item">FAQ</a>
-  </div>
-
-  <div class="navbar-end">
-    <button class="notification-btn" (click)="toggleNotifications()">
-      <i class="fas fa-bell"></i>
-      <span class="notification-badge" *ngIf="hasNotifications">3</span>
-    </button>
     
     <div class="profile-dropdown">
-      <button class="profile-btn" (click)="toggleProfileMenu()">
+      <button class="nav-item profile-btn" (click)="toggleProfileMenu($event)">
         <i class="fas fa-user-circle"></i>
       </button>
-      <div class="dropdown-menu" *ngIf="isProfileMenuOpen">
-        <a routerLink="/profile" class="dropdown-item">
+      
+      <!-- Login Form -->
+      <div class="dropdown-menu login-form" [class.show]="isProfileMenuOpen && !isAuthenticated">
+        <form (ngSubmit)="login()" class="auth-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              [(ngModel)]="email" 
+              name="email"
+              placeholder="Votre email"
+              required
+            >
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input 
+              type="password" 
+              id="password" 
+              [(ngModel)]="password" 
+              name="password"
+              placeholder="Votre mot de passe"
+              required
+            >
+          </div>
+
+          <div class="error-message" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </div>
+
+          <button 
+            type="submit" 
+            class="login-btn"
+            [disabled]="isLoading"
+          >
+            <span *ngIf="!isLoading">Se connecter</span>
+            <span *ngIf="isLoading">Chargement...</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- User Profile Menu -->
+      <div class="dropdown-menu" [class.show]="isProfileMenuOpen && isAuthenticated">
+        <div class="user-info" *ngIf="user">
+          <div class="user-name">{{ user.nom_d_utilisateur }}</div>
+          <div class="user-balance">
+            <i class="fas fa-coins"></i>
+            {{ user.solde }} €
+          </div>
+        </div>
+        
+        <a routerLink="/profil" class="dropdown-item">
           <i class="fas fa-user"></i>
           <span>Mon Profil</span>
         </a>
@@ -52,11 +88,18 @@
           <i class="fas fa-cog"></i>
           <span>Paramètres</span>
         </a>
-        <a routerLink="/logout" class="dropdown-item">
+        <button class="dropdown-item" (click)="logout()">
           <i class="fas fa-sign-out-alt"></i>
           <span>Déconnexion</span>
-        </a>
+        </button>
       </div>
     </div>
+  </div>
+
+  <div class="navbar-end">
+    <button class="notification-btn" (click)="toggleNotifications()">
+      <i class="fas fa-bell"></i>
+      <span class="notification-badge" *ngIf="hasNotifications">3</span>
+    </button>
   </div>
 </nav>

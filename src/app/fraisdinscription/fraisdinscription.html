@@ -1,0 +1,53 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="onClose()">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div class="alert-content">
+      <div class="alert-icon">
+        <i class="fas fa-exclamation-circle"></i>
+      </div>
+
+      <h2>Confirmation de participation</h2>
+      
+      <div class="alert-message">
+        <p>Les frais de participation de <strong>{{ fraisParticipation }}€</strong> seront débités de votre solde.</p>
+        <p>Votre solde actuel: <strong>{{ userBalance }}€</strong></p>
+      </div>
+
+      <div *ngIf="!showConfirmation" class="warning-message">
+        <i class="fas fa-info-circle"></i>
+        Cette action est irréversible. Assurez-vous d'avoir suffisamment de fonds sur votre compte.
+      </div>
+
+      <div *ngIf="showConfirmation" class="success-message">
+        <i class="fas fa-check-circle"></i>
+        Les frais de participation de {{ fraisParticipation }}€ ont été débités avec succès de votre solde.
+      </div>
+
+      <div class="actions">
+        <button *ngIf="!showConfirmation" class="cancel-btn" (click)="onClose()">
+          <i class="fas fa-times"></i>
+          Annuler
+        </button>
+        <button *ngIf="!showConfirmation" class="confirm-btn" (click)="onConfirm()">
+          <i class="fas fa-check"></i>
+          Confirmer
+        </button>
+        <button *ngIf="showConfirmation" class="confirm-btn" (click)="onContinue()">
+          <i class="fas fa-arrow-right"></i>
+          Continuer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-formulaire-de-participation
+  [isOpen]="isParticipationFormOpen"
+  [enchere]="enchere"
+  [userBalance]="userBalance"
+  (close)="onParticipationFormClose()"
+  (submit)="onParticipationSubmit($event)">
+</app-formulaire-de-participation>

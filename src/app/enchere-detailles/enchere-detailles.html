@@ -1,0 +1,58 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="onClose()">&times;</button>
+    
+    <div class="enchere-details">
+      <div class="enchere-image">
+        <img [src]="enchere?.url_photo_darticle" [alt]="enchere?.nom_article">
+      </div>
+      
+      <div class="enchere-info">
+        <h2>{{ enchere?.nom_article }}</h2>
+        
+        <div class="description">
+          <h3>Description</h3>
+          <p>{{ enchere?.description }}</p>
+        </div>
+        
+        <div class="details-grid">
+          <div class="detail-item">
+            <i class="fas fa-tag"></i>
+            <span>Catégorie: {{ enchere?.categorie }}</span>
+          </div>
+          
+          <div class="detail-item">
+            <i class="fas fa-users"></i>
+            <span>Participants minimum: {{ enchere?.min_participants }}</span>
+          </div>
+          
+          <div class="detail-item">
+            <i class="fas fa-coins"></i>
+            <span>Frais de participation: {{ enchere?.frais_participation }} €</span>
+          </div>
+          
+          <div class="detail-item">
+            <i class="fas fa-clock"></i>
+            <span>Temps restant: {{ getTimeRemaining() }}</span>
+          </div>
+        </div>
+        
+        <div class="actions">
+          <button class="participate-btn" (click)="onParticipate()">
+            Participer à l'enchère
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-fraisdinscription
+  [isOpen]="isFraisModalOpen"
+  [fraisParticipation]="enchere?.frais_participation || 0"
+  [enchere]="enchere"
+  [userBalance]="userBalance"
+  (close)="onFraisModalClose()"
+  (confirm)="onFraisModalConfirm()"
+  (balanceUpdated)="onBalanceUpdated($event)">
+</app-fraisdinscription>

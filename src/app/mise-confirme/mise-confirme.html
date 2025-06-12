@@ -1,0 +1,30 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="onClose()">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div class="confirmation-content">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+
+      <h2>Mise confirmée !</h2>
+
+      <div class="message-box">
+        <p>Votre mise de <strong>{{ montantMise }}€</strong> a été confirmée avec succès.</p>
+        <p>Vous serez notifié du résultat de cette enchère dès qu'elle sera terminée.</p>
+      </div>
+
+      <div class="notification-info">
+        <i class="fas fa-bell"></i>
+        <p>Les notifications seront envoyées par email et dans votre espace personnel.</p>
+      </div>
+
+      <button class="close-button" (click)="onClose()">
+        <i class="fas fa-check"></i>
+        Compris
+      </button>
+    </div>
+  </div>
+</div>
